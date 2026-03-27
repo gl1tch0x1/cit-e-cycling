@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b0c0f" />
+    <meta
+      name="description"
+      content="Cit-E Cycling – the UK's premier urban cycling competition. Register your interest and compete for your city."
+    />
+    <title>Cit-E Cycling | National Urban Cycling Competition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* ── HOME-SPECIFIC ─────────────────────────────────── */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding: calc(var(--nav-h) + 3rem) clamp(1rem, 4vw, 2.5rem)
+          clamp(3rem, 6vw, 5rem);
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 75% 60% at 80% 40%,
+            rgba(200, 241, 53, 0.055) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 50% 70% at 10% 80%,
+            rgba(58, 143, 255, 0.04) 0%,
+            transparent 50%
+          ),
+          linear-gradient(175deg, #0b0c0f 0%, #111318 50%, #0e1009 100%);
+      }
+      .hero-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        opacity: 0.25;
+        background-image:
+          linear-gradient(rgba(200, 241, 53, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(200, 241, 53, 0.08) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 30%,
+          transparent 80%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 30%,
+          transparent 80%
+        );
+      }
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1280px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      @media (max-width: 900px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .hero-visual {
+          display: none;
+        }
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--lime);
+        background: rgba(200, 241, 53, 0.07);
+        border: 1px solid rgba(200, 241, 53, 0.2);
+        border-radius: 100px;
+        padding: 0.4rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 8px var(--lime);
+      }
+      .hero-title {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(3.5rem, 9vw, 8rem);
+        font-weight: 900;
+        line-height: 0.92;
+        letter-spacing: -1px;
+        color: var(--text);
+        margin-bottom: 1.75rem;
+      }
+      .hero-title .accent {
+        color: var(--lime);
+        display: block;
+      }
+      .hero-desc {
+        font-size: 1.0625rem;
+        color: var(--text-dim);
+        line-height: 1.75;
+        max-width: 480px;
+        margin-bottom: 2.5rem;
+      }
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        margin-bottom: 3rem;
+      }
+      .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .hero-stat-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 0.45rem 1rem;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+      }
+      .hero-stat-chip strong {
+        color: var(--text);
+      }
+
+      /* Orbital graphic */
+      .hero-visual {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .orbital {
+        width: min(420px, 42vw);
+        height: min(420px, 42vw);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .orbital-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(200, 241, 53, 0.12);
+        animation: orbit-spin linear infinite;
+      }
+      .orbital-ring-1 {
+        inset: 0;
+        animation-duration: 35s;
+      }
+      .orbital-ring-2 {
+        inset: 15%;
+        animation-duration: 25s;
+        animation-direction: reverse;
+        border-color: rgba(200, 241, 53, 0.08);
+      }
+      .orbital-ring-3 {
+        inset: 30%;
+        animation-duration: 18s;
+        border-color: rgba(200, 241, 53, 0.15);
+      }
+      @keyframes orbit-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .orbital-dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--lime);
+        box-shadow: 0 0 12px var(--lime);
+        top: -5px;
+        left: calc(50% - 5px);
+      }
+      .orbital-dot-2 {
+        background: #3a8fff;
+        box-shadow: 0 0 10px #3a8fff;
+        top: calc(50% - 5px);
+        right: -5px;
+        left: auto;
+      }
+      .orbital-center {
+        width: 35%;
+        height: 35%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(200, 241, 53, 0.15) 0%,
+          transparent 70%
+        );
+        border: 1px solid rgba(200, 241, 53, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Features */
+      .feat-card {
+        background: var(--bg1);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 1.75rem;
+        transition:
+          transform var(--t-base),
+          border-color var(--t-base),
+          box-shadow var(--t-base);
+        position: relative;
+        overflow: hidden;
+      }
+      .feat-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--lime),
+          transparent
+        );
+        transform: scaleX(0);
+        transition: transform 0.4s ease;
+      }
+      .feat-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-md);
+        box-shadow: var(--shadow-md);
+      }
+      .feat-card:hover::before {
+        transform: scaleX(1);
+      }
+      .feat-title {
+        font-weight: 700;
+        font-size: 1.0625rem;
+        margin: 1rem 0 0.4rem;
+      }
+      .feat-desc {
+        font-size: 0.875rem;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
+      /* Club cards */
+      .club-card {
+        background: var(--bg1);
+        border: 1px solid var(--border);
+        border-radius: var(--r-lg);
+        padding: 1.5rem;
+        text-align: center;
+        transition: all var(--t-base);
+        cursor: default;
+      }
+      .club-card:hover {
+        border-color: var(--border-hi);
+        background: var(--bg2);
+        transform: translateY(-3px);
+        box-shadow:
+          0 0 0 1px rgba(200, 241, 53, 0.08),
+          var(--shadow-sm);
+      }
+      .club-emoji {
+        font-size: 2.2rem;
+        margin-bottom: 0.85rem;
+        display: block;
+      }
+      .club-name {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      .club-loc {
+        font-size: 0.8rem;
+        color: var(--text-faint);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+      }
+
+      /* CTA strip */
+      .cta-strip {
+        background: linear-gradient(
+          135deg,
+          rgba(200, 241, 53, 0.06) 0%,
+          rgba(58, 143, 255, 0.04) 100%
+        );
+        border-top: 1px solid rgba(200, 241, 53, 0.08);
+        border-bottom: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <?php $nav_active = 'home'; $page_title = 'Home'; // Inline nav for pure
+    HTML page ?>
+    <!-- NAV (inline for HTML-only file) -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="nav-brand" aria-label="Cit-E Cycling Home">
+        <span class="nav-brand-dot" aria-hidden="true"></span>
+        CIT-E CYCLING
+      </a>
+      <div class="nav-spacer"></div>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="register_form.html">Register Interest</a></li>
+      </ul>
+      <a href="admin_login.html" class="btn btn-outline btn-sm"
+        ><i class="bi bi-lock"></i> Admin</a
+      >
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="navDrawer"
+      >
+        <i class="bi bi-list" id="navToggleIcon"></i>
+      </button>
+    </nav>
+    <div
+      class="nav-drawer"
+      id="navDrawer"
+      role="dialog"
+      aria-label="Mobile navigation"
+      aria-hidden="true"
+    >
+      <a href="index.html"><i class="bi bi-house"></i> Home</a>
+      <a href="register_form.html"
+        ><i class="bi bi-person-plus"></i> Register Interest</a
+      >
+      <a href="admin_login.html"><i class="bi bi-lock"></i> Admin Login</a>
+    </div>
+
+    <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero section">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-content fade-in">
+          <div class="hero-eyebrow">National UK Cycling Competition</div>
+          <h1 class="hero-title">
+            Urban<br />
+            <span class="accent">Cycling</span>
+            Competition
+          </h1>
+          <p class="hero-desc">
+            Ten pop-up tournaments across the city. 20 high-tech bikes. One
+            ultimate champion. Compete as an individual or represent your
+            cycling club — and earn your place in the national finals.
+          </p>
+          <div class="hero-cta">
+            <a href="register_form.html" class="btn btn-lime btn-lg">
+              <i class="bi bi-person-plus-fill"></i> Register Interest
+            </a>
+            <a href="admin_login.html" class="btn btn-outline btn-lg">
+              <i class="bi bi-lock"></i> Admin Portal
+            </a>
+          </div>
+          <div class="hero-stats">
+            <span class="hero-stat-chip"
+              ><i class="bi bi-geo-alt-fill" style="color: var(--lime)"></i
+              ><strong>10</strong> tournaments</span
+            >
+            <span class="hero-stat-chip"
+              ><i class="bi bi-bicycle" style="color: var(--blue)"></i
+              ><strong>20</strong> smart bikes</span
+            >
+            <span class="hero-stat-chip"
+              ><i class="bi bi-people-fill" style="color: var(--amber)"></i
+              ><strong>4</strong> registered clubs</span
+            >
+            <span class="hero-stat-chip"
+              ><i class="bi bi-clock" style="color: var(--green)"></i
+              ><strong>1hr</strong> slots</span
+            >
+          </div>
+        </div>
+
+        <div class="hero-visual fade-in fade-in-3" aria-hidden="true">
+          <div class="orbital">
+            <div class="orbital-ring orbital-ring-1">
+              <div class="orbital-dot"></div>
+            </div>
+            <div class="orbital-ring orbital-ring-2">
+              <div class="orbital-dot orbital-dot-2"></div>
+            </div>
+            <div class="orbital-ring orbital-ring-3"></div>
+            <div class="orbital-center">🚴</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES ──────────────────────────────────────────────────────── -->
+    <section
+      class="section"
+      style="background: var(--bg1)"
+      aria-label="Features"
+    >
+      <div class="wrap">
+        <div class="text-center mb-6">
+          <div class="t-overline mb-2">Why Compete</div>
+          <h2 class="t-h1">Everything You Need<br />to Race</h2>
+        </div>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+          "
+        >
+          <div class="feat-card fade-in fade-in-1">
+            <div class="icon-box icon-box-lime">
+              <i class="bi bi-lightning-charge-fill"></i>
+            </div>
+            <div class="feat-title">Live Power Tracking</div>
+            <div class="feat-desc">
+              High-tech exercise bikes measure your watt output in real-time
+              every second you're on the saddle.
+            </div>
+          </div>
+          <div class="feat-card fade-in fade-in-2">
+            <div class="icon-box icon-box-blue">
+              <i class="bi bi-map-fill"></i>
+            </div>
+            <div class="feat-title">Distance Metrics</div>
+            <div class="feat-desc">
+              Every kilometre is tracked and attributed to your total score and
+              your club's combined distance tally.
+            </div>
+          </div>
+          <div class="feat-card fade-in fade-in-3">
+            <div class="icon-box icon-box-amber">
+              <i class="bi bi-people-fill"></i>
+            </div>
+            <div class="feat-title">Team & Individual</div>
+            <div class="feat-desc">
+              Race solo for personal glory or represent your cycling club —
+              prizes are awarded across both categories.
+            </div>
+          </div>
+          <div class="feat-card fade-in fade-in-4">
+            <div class="icon-box icon-box-green">
+              <i class="bi bi-award-fill"></i>
+            </div>
+            <div class="feat-title">Multiple Prize Tiers</div>
+            <div class="feat-desc">
+              Age categories, gender categories and top-performing clubs are all
+              recognised on the podium.
+            </div>
+          </div>
+          <div class="feat-card fade-in fade-in-5">
+            <div
+              class="icon-box icon-box-lime"
+              style="
+                background: rgba(58, 143, 255, 0.1);
+                color: #3a8fff;
+                border-color: rgba(58, 143, 255, 0.2);
+              "
+            >
+              <i class="bi bi-calendar3"></i>
+            </div>
+            <div class="feat-title">Flexible Booking</div>
+            <div class="feat-desc">
+              Book a convenient 1-hour competition slot at any of the 10
+              city-wide tournament locations.
+            </div>
+          </div>
+          <div class="feat-card fade-in fade-in-6">
+            <div
+              class="icon-box icon-box-lime"
+              style="
+                background: rgba(255, 64, 64, 0.08);
+                color: var(--red);
+                border-color: rgba(255, 64, 64, 0.18);
+              "
+            >
+              <i class="bi bi-trophy-fill"></i>
+            </div>
+            <div class="feat-title">National Finals</div>
+            <div class="feat-desc">
+              Top performers earn the right to represent their city against
+              cyclists from across the UK.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CLUBS ──────────────────────────────────────────────────────────── -->
+    <section class="section" aria-label="Clubs">
+      <div class="wrap">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+          "
+          class="clubs-layout"
+        >
+          <div>
+            <div class="t-overline mb-2">Competing Teams</div>
+            <h2 class="t-h1 mb-3">Meet the<br />Clubs</h2>
+            <p class="t-body mb-4">
+              Four elite cycling clubs from across the North East are already
+              registered and ready to compete for city-wide supremacy.
+            </p>
+            <a href="register_form.html" class="btn btn-outline">
+              <i class="bi bi-person-plus"></i> Register Your Interest
+            </a>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem">
+            <div class="club-card">
+              <span class="club-emoji">🔴</span>
+              <div class="club-name">Roker Rollers</div>
+              <div class="club-loc">
+                <i class="bi bi-geo-alt-fill"></i>Sunderland
+              </div>
+            </div>
+            <div class="club-card">
+              <span class="club-emoji">⚫</span>
+              <div class="club-name">Byker Bikers</div>
+              <div class="club-loc">
+                <i class="bi bi-geo-alt-fill"></i>Newcastle
+              </div>
+            </div>
+            <div class="club-card">
+              <span class="club-emoji">🔵</span>
+              <div class="club-name">Middlesbrough Movers</div>
+              <div class="club-loc">
+                <i class="bi bi-geo-alt-fill"></i>Middlesbrough
+              </div>
+            </div>
+            <div class="club-card">
+              <span class="club-emoji">🟡</span>
+              <div class="club-name">Durham Dynamos</div>
+              <div class="club-loc">
+                <i class="bi bi-geo-alt-fill"></i>Durham
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA STRIP ──────────────────────────────────────────────────────── -->
+    <section class="cta-strip section-sm" aria-label="Call to action">
+      <div class="wrap text-center">
+        <div class="t-overline mb-2">Ready to Race?</div>
+        <h2 class="t-h1 mb-3">Register Your<br />Interest Today</h2>
+        <p class="t-body" style="max-width: 480px; margin: 0 auto 2rem">
+          Sign up now to be notified when bookings open and secure your place in
+          the competition.
+        </p>
+        <a href="register_form.html" class="btn btn-lime btn-xl">
+          <i class="bi bi-arrow-right-circle-fill"></i> Get Started
+        </a>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────────────────── -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <span class="footer-brand"
+          ><i class="bi bi-bicycle me-2"></i>CIT-E CYCLING</span
+        >
+        <span class="footer-copy"
+          >&copy; 2024 Cit-E Cycling. All rights reserved.</span
+        >
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        "use strict";
+        const toggle = document.getElementById("navToggle");
+        const drawer = document.getElementById("navDrawer");
+        const icon = document.getElementById("navToggleIcon");
+        if (toggle && drawer) {
+          toggle.addEventListener("click", function () {
+            const open = drawer.classList.toggle("open");
+            icon.className = open ? "bi bi-x-lg" : "bi bi-list";
+            toggle.setAttribute("aria-expanded", open);
+            drawer.setAttribute("aria-hidden", !open);
+          });
+          document.addEventListener("click", function (e) {
+            if (!toggle.contains(e.target) && !drawer.contains(e.target)) {
+              drawer.classList.remove("open");
+              icon.className = "bi bi-list";
+              toggle.setAttribute("aria-expanded", "false");
+            }
+          });
+        }
+        /* Clubs layout responsive */
+        function fixLayout() {
+          const el = document.querySelector(".clubs-layout");
+          if (el)
+            el.style.gridTemplateColumns =
+              window.innerWidth < 768 ? "1fr" : "1fr 1fr";
+        }
+        fixLayout();
+        window.addEventListener("resize", fixLayout);
+      })();
+    </script>
+  </body>
+</html>
