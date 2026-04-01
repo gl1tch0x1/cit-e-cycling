@@ -68,6 +68,81 @@ if (empty($errors)) {
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+   <nav class="nav">
+     <a href="index.html" class="nav-brand">
+        <span class="nav-brand-dot" aria-hidden="true">
+        </span>CIT-E Cycling</a>
+        <div class="nav-spacer"></div>
+        <a href="admin_login.html" class="btn btn-outline btn-sm">
+            <i class="bi bi-lock"></i> Admin 
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <i class="bi bi-list" id="navToggleIcon"></i>
+        </button>
+    </nav>
+<div class="nav-drawer" id="navDrawer">
+    <a href="index.html"><i class="bi bi-house"></i> Home </a>
+    <a href="register_form.html"><i class="bi bi-person-plus"></i> Register Interest</a>
+    <a href="admin_login.html"><i class="bi bi-lock"></i> Admin Login</a>
+</div>
+
+<div class="page-top">
+    <div class="page-top-inner">
+        <div class="wrap">
+            <a href="register_form.html" class="breadcrumb-link">
+                <i class="bi bi-arrow-left"></i> Back to Form 
+            </a>
+            <div class="t-overline mb-a">Registeration</div>
+            <h1 class="t-h1">
+                <?php echo $success ? 'Registration<br>Complete!' : ($already_reg ? 'Already<br>Registered!' : 'Registration<br>Result'); ?>
+            </h1>
+        </div>
+    </div>
+    <div class"page-divider"></div>
+</div>
+
+<main class="section" id="main-content">
+    <div class="wrap wrap-sm fade-in">
+        <?php if(!empty($errors)): ?>
+            <div class="alert alert-error-triangle-fill"></i>
+            <div class="alert-content">
+                <strong>Please fix the following: </strong>
+                <ul style="margin: 5rem 0 0; padding-left:1.2rem">
+                    <?php foreach ($errors as $err): ?>
+                        <li><?= htmlspecialchars($err) ?></li>
+                        <?php endforeach; ?>
+                </ul>
+            </div>
+    </div>
+    <a href="register_form.html" class="btn btn-outline">
+        <i class="bi bi-arrow-left"></li> Go Back
+    </a>
+
+    <?php elseif ($db_error) : ?>
+        <div class="alert alert-error md-4">
+            <i class="bi bi-database-x"></i>
+            <div class="alert-content"><strong>Database Error.</strong> 
+            Please try again in a moment. </div>
+        </div>
+        <a href="register_form.html" class="btn btn-outline"><i class="bi bi-arrow-left"></i>
+        Try Again! </a>
+
+        <?php elseif ($already_reg): ?>
+            <div class="card" style="text-alignment:center;padding:3rem 2rem">
+                <div style="font-size:3.5rem;margin-bottom:1.25rem"></div>
+                <h2 class="t-h2 mb-2">Already Registered! </h2>
+                <p class="t-body" style="max-width:380px;margin:0 auto 2rem">
+                The email <strong style="color:var(--text)"><?= htmlspecialchars($email) ?></strong>
+                is already on our list. We'll be in touch when booking open! </p>
+                <a href="index.html" class="btn btn-lime"><i class="bi bi-house-fill"><i>
+                    Back to Home 
+                </a>
+            </div>
+
+
+
+
+
+
 </body>
 </html>
